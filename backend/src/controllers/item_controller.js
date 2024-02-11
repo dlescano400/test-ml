@@ -3,9 +3,7 @@ import axios from "axios";
 
 const listsItem = async (req, res) => {
   try {
-    const { q } = req.query;
-    const limit = 4;
-    const offset = 0;
+    const { q, limit = 4, offset = 0 } = req.query;
 
     const result_query = await axios
       .get(`${ML_API}sites/MLA/search?q=${q}&limit=${limit}&offset=${offset}`)
