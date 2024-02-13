@@ -1,4 +1,6 @@
-const ML_API = "https://api.mercadolibre.com/";
+import dotenv from "dotenv";
+dotenv.config();
+const ML_API = process.env.URL_API_ML;
 import axios from "axios";
 
 const listsItem = async (req, res) => {
@@ -6,7 +8,7 @@ const listsItem = async (req, res) => {
     const { q, limit = 4, offset = 0 } = req.query;
 
     const result_query = await axios
-      .get(`${ML_API}sites/MLA/search?q=${q}&limit=${limit}&offset=${offset}`)
+      .get(`${ML_API}/sites/MLA/search?q=${q}&limit=${limit}&offset=${offset}`)
       .then((res) => {
         return res.data;
       })
@@ -26,8 +28,12 @@ const listsItem = async (req, res) => {
     );
 
     const categories = category
-      ? category.values.map((value) => value.name)
+      ? category.values.map((value) => {
+          const { path_from_root } = value;
+          return path_from_root.map((item) => item.name);
+        })
       : [];
+    const full_categories = [].concat.apply([], categories);
 
     const items = result_query.results.map((item) => {
       return {
@@ -45,7 +51,7 @@ const listsItem = async (req, res) => {
     });
     const result = {
       ...data_author,
-      categories,
+      categories: full_categories,
       items,
     };
     res.json(result);
@@ -58,7 +64,7 @@ const getItem = async (req, res) => {
   try {
     const { id } = req.params;
     const item_query = await axios
-      .get(`${ML_API}items/${id}`)
+      .get(`${ML_API}/items/${id}`)
       .then((res) => {
         const item = res.data;
 
@@ -81,14 +87,13 @@ const getItem = async (req, res) => {
       });
 
     const description = await axios
-      .get(`${ML_API}${id}/description`)
+      .get(`${ML_API}/items/${id}/description`)
       .then((res) => {
-        res.plain_text;
+        return res.data.plain_text;
       })
       .catch((err) => {
         console.error(err);
       });
-
     const data_author = { author: { name: "Jual", lastname: "Perez" } };
     const full_item = { ...item_query, description };
     const result = { ...data_author, item: full_item };

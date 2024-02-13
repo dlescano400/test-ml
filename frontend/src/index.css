@@ -1,0 +1,24 @@
+:root {
+  --font--text: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  --main-background-color: #ebebeb;
+  --main-color: rgb(18, 18, 18);
+  --primary-color-background: #ffe600;
+  --color--BLUE: #3483fa;
+  --color--GREEN: #03bf5e;
+  --color--WHITE: #ffffff;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font--text);
+  line-height: 1.5;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body {
+  background-color: var(--main-background-color);
+}

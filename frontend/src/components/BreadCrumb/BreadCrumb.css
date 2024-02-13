@@ -1,0 +1,17 @@
+.breadcrumb {
+  background-color: var(--background-color);
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.breadcrumb li span {
+  padding: 0 0.5rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .breadcrumb {
+    padding: 0 24px;
+  }
+}

@@ -1,0 +1,17 @@
+.loader {
+  border: 5px solid #f3f3f3; /* Color del borde exterior */
+  border-radius: 50%; /* Para hacerlo circular */
+  border-top: 5px solid #9ac7e4; /* Color del borde superior */
+  width: 48px; /* Ancho del spinner */
+  height: 48px; /* Alto del spinner */
+  animation: spin 2s linear infinite; /* Animación */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

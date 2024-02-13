@@ -1,0 +1,9 @@
+.container-items {
+  display: inline-flex;
+  flex-direction: column;
+  width: 100%;
+}
+li {
+  list-style: none;
+  background-color: var(--color-WHITE);
+}
